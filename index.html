@@ -5,37 +5,90 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Silkscreen&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" type="text/css" />
   </head>
   <body>
-    <div id="calculator">
-      <div id="display"></div>
-      <div id="keypad">
-        <div class="btn op" data-value="AC">AC</div>
-        <div class="btn op" data-value="DEL">DEL</div>
-        <div class="btn op" data-value="%">%</div>
-        <div class="btn op" data-value="/">/</div>
-        <div class="btn num" data-value="7">7</div>
-        <div class="btn num" data-value="8">8</div>
-        <div class="btn num" data-value="9">9</div>
-        <div class="btn op" data-value="*">x</div>
-        <div class="btn num" data-value="4">4</div>
-        <div class="btn num" data-value="5">5</div>
-        <div class="btn num" data-value="6">6</div>
-        <div class="btn op" data-value="+">+</div>
-        <div class="btn num" data-value="1">1</div>
-        <div class="btn num" data-value="2">2</div>
-        <div class="btn num" data-value="3">3</div>
-        <div class="btn op" data-value="-">-</div>
-        <div class="btn num" data-value="0">0</div>
-        <div class="btn num" data-value=".">.</div>
-        <div class="btn num" data-value="+/-">+/-</div>
-        <div class="btn op" data-value="=">=</div>
-      </div>
-    </div>
+    <main class="app-shell">
+      <header class="hero">
+        <div class="hero__text">
+          <p class="eyebrow">Reimagined</p>
+          <h1>
+            Aurora Calculator
+            <span class="accent">Live · Draggable · Modern</span>
+          </h1>
+          <p class="subtext">
+            A playful, glassy calculator with drag & drop panels and a live
+            world clock.
+          </p>
+        </div>
+        <div class="hero__pills">
+          <span class="pill">Drag panels by their handles</span>
+          <span class="pill">Time zones with live seconds</span>
+        </div>
+      </header>
+
+      <section id="workspace">
+        <section
+          class="card calculator-card draggable"
+          data-panel="calculator"
+          aria-label="Calculator panel"
+        >
+          <div class="card-handle">
+            <span class="handle-dots" aria-hidden="true">⋮⋮⋮</span>
+            <span>Calculator</span>
+          </div>
+          <div id="display" aria-live="polite">0</div>
+          <div id="keypad">
+            <div class="btn op" data-value="AC">AC</div>
+            <div class="btn op" data-value="DEL">DEL</div>
+            <div class="btn op" data-value="%">%</div>
+            <div class="btn op" data-value="/">÷</div>
+            <div class="btn num" data-value="7">7</div>
+            <div class="btn num" data-value="8">8</div>
+            <div class="btn num" data-value="9">9</div>
+            <div class="btn op" data-value="*">×</div>
+            <div class="btn num" data-value="4">4</div>
+            <div class="btn num" data-value="5">5</div>
+            <div class="btn num" data-value="6">6</div>
+            <div class="btn op" data-value="+">+</div>
+            <div class="btn num" data-value="1">1</div>
+            <div class="btn num" data-value="2">2</div>
+            <div class="btn num" data-value="3">3</div>
+            <div class="btn op" data-value="-">−</div>
+            <div class="btn num" data-value="0">0</div>
+            <div class="btn num" data-value=".">.</div>
+            <div class="btn num" data-value="+/-">±</div>
+            <div class="btn op" data-value="=">=</div>
+          </div>
+        </section>
+
+        <section
+          class="card clock-card draggable"
+          data-panel="clock"
+          aria-label="Live clock panel"
+        >
+          <div class="card-handle">
+            <span class="handle-dots" aria-hidden="true">⋮⋮⋮</span>
+            <span>Live World Clock</span>
+          </div>
+          <div class="clock-body">
+            <div class="clock-face" id="clock-display">
+              00:00:00 — Loading
+            </div>
+            <div class="tz-row">
+              <label for="time-zone-select">Time zone</label>
+              <select id="time-zone-select"></select>
+            </div>
+            <p class="clock-hint">
+              Updates every second. Drag this card wherever it suits you.
+            </p>
+          </div>
+        </section>
+      </section>
+    </main>
     <script src="calculator.js"></script>
   </body>
 </html>
