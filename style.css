@@ -9,6 +9,7 @@
   --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
   --radius: 22px;
   --accent-gradient: linear-gradient(135deg, #7ce7ff, #f68bf3);
+  --handle-dots-spacing: -4px;
 }
 
 * {
@@ -126,7 +127,7 @@ body {
 
 .handle-dots {
   display: inline-block;
-  letter-spacing: -4px;
+  letter-spacing: var(--handle-dots-spacing);
   font-size: 1.1rem;
   color: var(--muted);
 }

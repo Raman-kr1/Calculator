@@ -4,6 +4,8 @@ const clockDisplay = document.getElementById("clock-display");
 const timeZoneSelect = document.getElementById("time-zone-select");
 const draggablePanels = document.querySelectorAll(".draggable");
 
+const MAX_DECIMAL_PRECISION = 10;
+
 const calculatorState = {
   current: "0",
   previous: null,
@@ -12,14 +14,18 @@ const calculatorState = {
 
 const isOperator = (val) => ["+", "-", "*", "/", "%"].includes(val);
 
+function normalizeCurrentValue() {
+  if (!Number.isFinite(Number(calculatorState.current))) {
+    calculatorState.current = "0";
+  }
+}
+
 function updateDisplay(nextValue = calculatorState.current) {
   display.textContent = nextValue;
 }
 
 function inputDigit(value) {
-  if (!Number.isFinite(Number(calculatorState.current))) {
-    calculatorState.current = "0";
-  }
+  normalizeCurrentValue();
   if (value === "." && calculatorState.current.includes(".")) return;
   if (calculatorState.current === "0" && value !== ".") {
     calculatorState.current = value;
@@ -30,9 +36,7 @@ function inputDigit(value) {
 }
 
 function setOperator(op) {
-  if (!Number.isFinite(Number(calculatorState.current))) {
-    calculatorState.current = "0";
-  }
+  normalizeCurrentValue();
   if (calculatorState.operator && calculatorState.previous !== null) {
     evaluate();
   }
@@ -106,7 +110,7 @@ function evaluate() {
   if (!Number.isFinite(result)) {
     calculatorState.current = "Error";
   } else {
-    const trimmed = parseFloat(result.toFixed(10));
+    const trimmed = parseFloat(result.toFixed(MAX_DECIMAL_PRECISION));
     calculatorState.current = `${trimmed}`;
   }
 
