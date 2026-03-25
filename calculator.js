@@ -201,6 +201,8 @@ function enableDrag(panel) {
   const handle = panel.querySelector(".card-handle");
   if (!handle) return;
 
+  const supportsPointerCapture = typeof handle.setPointerCapture === "function";
+
   let startX = 0;
   let startY = 0;
   let currentX = 0;
@@ -221,7 +223,7 @@ function enableDrag(panel) {
     panel.classList.remove("dragging");
     window.removeEventListener("pointermove", onPointerMove);
     window.removeEventListener("pointerup", onPointerUp);
-    if (handle.releasePointerCapture) {
+    if (supportsPointerCapture) {
       handle.releasePointerCapture(event.pointerId);
     }
   };
@@ -230,7 +232,7 @@ function enableDrag(panel) {
     dragging = true;
     startX = event.clientX - currentX;
     startY = event.clientY - currentY;
-    if (handle.setPointerCapture) {
+    if (supportsPointerCapture) {
       handle.setPointerCapture(event.pointerId);
     }
     window.addEventListener("pointermove", onPointerMove);
