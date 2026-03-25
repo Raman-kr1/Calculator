@@ -163,7 +163,7 @@ function populateTimeZones() {
   zones.forEach((zone) => {
     const option = document.createElement("option");
     option.value = zone;
-    option.textContent = zone.replace("_", " ");
+    option.textContent = zone.replace(/_/g, " ");
     timeZoneSelect.appendChild(option);
   });
 
