@@ -221,14 +221,18 @@ function enableDrag(panel) {
     panel.classList.remove("dragging");
     window.removeEventListener("pointermove", onPointerMove);
     window.removeEventListener("pointerup", onPointerUp);
-    handle.releasePointerCapture?.(event.pointerId);
+    if (handle.releasePointerCapture) {
+      handle.releasePointerCapture(event.pointerId);
+    }
   };
 
   handle.addEventListener("pointerdown", (event) => {
     dragging = true;
     startX = event.clientX - currentX;
     startY = event.clientY - currentY;
-    handle.setPointerCapture?.(event.pointerId);
+    if (handle.setPointerCapture) {
+      handle.setPointerCapture(event.pointerId);
+    }
     window.addEventListener("pointermove", onPointerMove);
     window.addEventListener("pointerup", onPointerUp);
   });
