@@ -94,7 +94,7 @@ function evaluate() {
   const second = parseFloat(calculatorState.current);
 
   if (calculatorState.operator === "/" && second === 0) {
-    calculatorState.current = "∞";
+    calculatorState.current = "Error";
     calculatorState.previous = null;
     calculatorState.operator = null;
     updateDisplay();
@@ -104,7 +104,7 @@ function evaluate() {
   const result = performCalculation(first, second, calculatorState.operator);
 
   if (!Number.isFinite(result)) {
-    calculatorState.current = "∞";
+    calculatorState.current = "Error";
   } else {
     const trimmed = parseFloat(result.toFixed(10));
     calculatorState.current = `${trimmed}`;
