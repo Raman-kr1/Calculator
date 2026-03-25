@@ -50,7 +50,7 @@ function toggleSign() {
 }
 
 function deleteDigit() {
-  if (calculatorState.current.length <= 1 || calculatorState.current === "-0") {
+  if (calculatorState.current.length <= 1) {
     calculatorState.current = "0";
   } else {
     calculatorState.current = calculatorState.current.slice(0, -1);
@@ -77,7 +77,7 @@ function performCalculation(a, b, op) {
     case "*":
       return a * b;
     case "/":
-      return b === 0 ? Infinity : a / b;
+      return a / b;
     case "%":
       return (a / 100) * b;
     default:
@@ -92,6 +92,15 @@ function evaluate() {
 
   const first = parseFloat(calculatorState.previous);
   const second = parseFloat(calculatorState.current);
+
+  if (calculatorState.operator === "/" && second === 0) {
+    calculatorState.current = "∞";
+    calculatorState.previous = null;
+    calculatorState.operator = null;
+    updateDisplay();
+    return;
+  }
+
   const result = performCalculation(first, second, calculatorState.operator);
 
   if (!Number.isFinite(result)) {
